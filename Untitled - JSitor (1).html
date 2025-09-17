@@ -1,0 +1,214 @@
+<!doctype html><html><head></head><body><!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Sydney</title>
+	<link href="https://fonts.googleapis.com/css2?family=Fira+Mono&display=swap" rel="stylesheet">
+	<style>
+		body {
+			margin: 0;
+			font-family: 'Fira Mono', monospace;
+			background: radial-gradient(circle at center, #0b0b0f, #050506);
+			color: #eaeaea;
+			text-align: center;
+			padding: 40px;
+			overflow: hidden;
+		}
+
+		canvas#snow {
+			position: fixed;
+			top: 0;
+			left: 0;
+			width: 100%;
+			height: 100%;
+			z-index: -1;
+		}
+
+		img.pfp {
+			width: 100px;
+			height: 100px;
+			border-radius: 50%;
+			border: 3px solid #d78bff;
+			margin-bottom: 15px;
+		}
+
+		h1 {
+			font-size: 24px;
+			color: #d78bff;
+		}
+
+		h1 span {
+			font-size: 14px;
+			font-weight: normal;
+			color: #aaa;
+		}
+
+		.links button {
+			margin: 5px;
+			padding: 6px 14px;
+			border: 1px solid #d78bff;
+			background: transparent;
+			color: #eaeaea;
+			border-radius: 6px;
+			cursor: pointer;
+		}
+
+		.links button:hover {
+			background: #d78bff20;
+		}
+
+		section {
+			margin-top: 40px;
+		}
+
+		section h2 {
+			font-size: 16px;
+			font-weight: bold;
+			color: #d78bff;
+			margin-bottom: 10px;
+		}
+
+		hr {
+			border: none;
+			border-top: 1px solid #333;
+			margin: 20px auto;
+			width: 80%;
+		}
+
+		.project {
+			margin-top: 20px;
+		}
+
+		.project h3 {
+			margin: 5px 0;
+			color: #fff;
+		}
+
+		.project p {
+			font-size: 14px;
+			color: #bbb;
+		}
+	</style>
+</head>
+
+<body>
+	<!-- Starry Snow Background -->
+	<canvas id="snow"></canvas>
+
+	<!-- Profile -->
+	<img src="https://cdn.discordapp.com/avatars/1302369693360980030/06232723f4371d80fd27e0c061eb6f84.png?size=4096"
+		alt="Profile Picture" class="pfp">
+	<h1>Sydney <span>(He/him)</span></h1>
+	<p>Now what the F is a vibecoder</p>
+
+	<!-- Links -->
+	<div class="links">
+		<button onclick="window.open('https://github.com/creatorcat70','_blank')">GitHub</button>
+		<button onclick="window.open('https://discord.gg/FdxKqAEqqM','_blank')">Discord</button>
+		<button onclick="window.open('https://your-portfolio.com','_blank')">Portfolio</button>
+	</div>
+
+	<!-- About Me -->
+	<section>
+		<hr>
+		<h2>&gt; about_me</h2>
+		<p>I'm a boy<br>
+			very skibidi <br>
+			Vplaza bad?
+		</p>
+	</section>
+
+	<!-- Projects -->
+	<section>
+		<hr>
+		<h2>&gt; projects</h2>
+		<div class="project">
+			<h3>Continium</h3>
+			<p>A scramjet-powered web proxy with a minimalistic supreme design.</p>
+		</div>
+	</section>
+
+	<!-- Credits -->
+	<section>
+		<hr>
+		<h2>&gt; credits</h2>
+		<div class="project">
+			<h3>Scaratek</h3>
+			<p>I'm sorry for stealing ur Portfolio 😅</p>
+		</div>
+	</section>
+
+	<!-- Snow / Stars Script -->
+	<script>
+		// Starry Snowfall Effect
+		const canvas = document.getElementById("snow");
+		const ctx = canvas.getContext("2d");
+		canvas.width = window.innerWidth;
+		canvas.height = window.innerHeight;
+
+		let flakes = [];
+
+		function createFlakes() {
+			for (let i = 0; i < 150; i++) {
+				flakes.push({
+					x: Math.random() * canvas.width,
+					y: Math.random() * canvas.height,
+					radius: Math.random() * 2 + 1,
+					speedY: Math.random() * 1 + 0.3,
+					speedX: (Math.random() - 0.5) * 0.3,
+					opacity: Math.random()
+				});
+			}
+		}
+
+		function drawFlakes() {
+			ctx.clearRect(0, 0, canvas.width, canvas.height);
+			ctx.fillStyle = "white";
+			ctx.beginPath();
+			for (let flake of flakes) {
+				ctx.globalAlpha = flake.opacity;
+				ctx.moveTo(flake.x, flake.y);
+				ctx.arc(flake.x, flake.y, flake.radius, 0, Math.PI * 2);
+			}
+			ctx.fill();
+			ctx.globalAlpha = 1.0;
+			moveFlakes();
+		}
+
+		function moveFlakes() {
+			for (let flake of flakes) {
+				flake.y += flake.speedY;
+				flake.x += flake.speedX;
+
+				// Make opacity flicker for star effect
+				flake.opacity += (Math.random() - 0.5) * 0.02;
+				if (flake.opacity < 0.1) flake.opacity = 0.1;
+				if (flake.opacity > 1) flake.opacity = 1;
+
+				if (flake.y > canvas.height) {
+					flake.y = 0;
+					flake.x = Math.random() * canvas.width;
+				}
+			}
+		}
+
+		function update() {
+			drawFlakes();
+			requestAnimationFrame(update);
+		}
+
+		createFlakes();
+		update();
+
+		window.addEventListener("resize", () => {
+			canvas.width = window.innerWidth;
+			canvas.height = window.innerHeight;
+			flakes = [];
+			createFlakes();
+		});
+	</script>
+</body>
+
+</html></body><html>
