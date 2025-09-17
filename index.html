@@ -91,6 +91,28 @@
 			font-size: 14px;
 			color: #bbb;
 		}
+
+		/* Buttons section */
+		.buttons {
+			display: flex;
+			justify-content: center;
+			flex-wrap: wrap;
+			gap: 8px;
+			margin-top: 10px;
+		}
+
+		.buttons img {
+			height: 31px;
+			width: 88px;
+			border: 1px solid #333;
+			border-radius: 3px;
+			transition: transform 0.2s ease, border-color 0.2s ease;
+		}
+
+		.buttons img:hover {
+			transform: scale(1.05);
+			border-color: #d78bff;
+		}
 	</style>
 </head>
 
@@ -138,7 +160,22 @@
 		<div class="project">
 			<h3>Vplaza</h3>
 			<p>the proxy is fine, the people running it aren't so good..</p>
-			<img src="https://raw.githubusercontent.com/vpl1aza/vpl1aza.github.io/main/vplazax.png" alt="Vplaza" width="120">
+			<img src="https://raw.githubusercontent.com/vpl1aza/vpl1aza.github.io/main/vplazax.png" alt="Vplaza"
+				width="120">
+		</div>
+	</section>
+
+	<!-- Buttons -->
+	<section>
+		<hr>
+		<h2>&gt; buttons</h2>
+		<div class="buttons">
+			<a href="https://example.com" target="_blank">
+				<img src="button.gif" alt="Button 1">
+			</a>
+			<a href="https://example.com" target="_blank">
+				<img src="wearr.gif" alt="Wearr">
+			</a>
 		</div>
 	</section>
 
@@ -222,5 +259,5 @@
 		});
 	</script>
 </body>
-</html>
 
+</html>
