@@ -2,221 +2,365 @@
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>@notsydney</title>
-    <link rel="icon" type="image/png" href="favicon.ico">
-    <link href="https://fonts.googleapis.com/css2?family=Fira+Mono&display=swap" rel="stylesheet">
-    <style>
-        /* General styles */
-        body {
-            margin: 0;
-            font-family: 'Fira Mono', monospace;
-            background: radial-gradient(circle at center, #0b0b0f, #050506);
-            color: #eaeaea;
-            text-align: center;
-            padding: 40px;
-            overflow-y: auto; /* allow vertical scrolling */
-            overflow-x: hidden; /* hide horizontal scroll */
-        }
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>@notsydney</title>
+	<link rel="icon" type="image/png" href="favicon.ico">
+	<link href="https://fonts.googleapis.com/css2?family=Fira+Mono&display=swap" rel="stylesheet">
+	<style>
+		/* General styles */
+		body {
+			margin: 0;
+			font-family: 'Fira Mono', monospace;
+			background: #050810;
+			color: #eaeaea;
+			text-align: left;
+			padding: 0;
+			overflow-y: auto;
+			overflow-x: hidden;
+		}
 
-        canvas#snow {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            z-index: -1;
-        }
+		.container {
+			max-width: 1200px;
+			margin: 0 auto;
+			padding: 80px 40px;
+		}
 
-        img.pfp {
-            width: 100px;
-            height: 100px;
-            border-radius: 50%;
-            border: 3px solid #d78bff;
-            margin-bottom: 15px;
-        }
+		canvas#snow {
+			position: fixed;
+			top: 0;
+			left: 0;
+			width: 100%;
+			height: 100%;
+			z-index: -1;
+		}
 
-        h1 {
-            font-size: 24px;
-            color: #d78bff;
-        }
+		.tagline {
+			display: inline-block;
+			padding: 8px 20px;
+			border: 1px solid rgba(215, 139, 255, 0.3);
+			border-radius: 50px;
+			font-size: 11px;
+			letter-spacing: 2px;
+			text-transform: uppercase;
+			color: #d78bff;
+			margin-bottom: 40px;
+		}
 
-        h1 span {
-            font-size: 14px;
-            font-weight: normal;
-            color: #aaa;
-        }
+		.hero {
+			margin-bottom: 80px;
+		}
 
-        .links button {
-            margin: 5px;
-            padding: 6px 14px;
-            border: 1px solid #d78bff;
-            background: transparent;
-            color: #eaeaea;
-            border-radius: 6px;
-            cursor: pointer;
-        }
+		.hero h1 {
+			font-size: 64px;
+			font-weight: 700;
+			color: #ffffff;
+			margin: 20px 0;
+			line-height: 1.2;
+			letter-spacing: -2px;
+		}
 
-        .links button:hover {
-            background: #d78bff20;
-        }
+		.pfp {
+			width: 100px;
+			height: 100px;
+			border-radius: 50%;
+			border: 3px solid #d78bff;
+			margin-bottom: 30px;
+		}
 
-        section {
-            margin-top: 40px;
-        }
+		.hero p {
+			font-size: 18px;
+			color: #8a8a8a;
+			max-width: 800px;
+			line-height: 1.8;
+			margin: 30px 0;
+		}
 
-        section h2 {
-            font-size: 16px;
-            font-weight: bold;
-            color: #d78bff;
-            margin-bottom: 10px;
-        }
+		.stats {
+			display: flex;
+			gap: 60px;
+			margin: 50px 0;
+		}
 
-        hr {
-            border: none;
-            border-top: 1px solid #333;
-            margin: 20px auto;
-            width: 80%;
-        }
+		.stat-item h3 {
+			font-size: 12px;
+			letter-spacing: 2px;
+			text-transform: uppercase;
+			color: #666;
+			margin-bottom: 10px;
+		}
 
-        .project {
-            margin-top: 20px;
-        }
+		.stat-item p {
+			font-size: 20px;
+			color: #ffffff;
+			margin: 0;
+		}
 
-        .project h3 {
-            margin: 5px 0;
-            color: #fff;
-        }
+		.cta-button {
+			display: inline-block;
+			padding: 16px 32px;
+			border: 1px solid rgba(255, 255, 255, 0.2);
+			background: transparent;
+			color: #ffffff;
+			border-radius: 8px;
+			cursor: pointer;
+			font-family: 'Fira Mono', monospace;
+			font-size: 14px;
+			transition: all 0.3s ease;
+			text-decoration: none;
+			margin-top: 20px;
+		}
 
-        .project p {
-            font-size: 14px;
-            color: #bbb;
-        }
+		.cta-button:hover {
+			background: rgba(215, 139, 255, 0.1);
+			border-color: #d78bff;
+		}
 
-        /* Buttons section */
-        .buttons {
-            display: flex;
-            justify-content: center;
-            flex-wrap: wrap;
-            gap: 8px;
-            margin-top: 10px;
-        }
+		.section-title {
+			font-size: 32px;
+			color: #ffffff;
+			margin: 80px 0 40px 0;
+			font-weight: 600;
+		}
 
-        .buttons img {
-            height: 31px;
-            width: 88px;
-            border: 1px solid #333;
-            border-radius: 3px;
-            transition: transform 0.2s ease, border-color 0.2s ease;
-        }
+		.projects-grid {
+			display: grid;
+			grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+			gap: 30px;
+			margin-bottom: 60px;
+		}
 
-        .buttons img:hover {
-            transform: scale(1.05);
-            border-color: #d78bff;
-        }
-    </style>
+		.project-card {
+			background: rgba(255, 255, 255, 0.03);
+			border: 1px solid rgba(255, 255, 255, 0.1);
+			border-radius: 12px;
+			padding: 30px;
+			transition: all 0.3s ease;
+		}
+
+		.project-card:hover {
+			border-color: #d78bff;
+			transform: translateY(-5px);
+			background: rgba(215, 139, 255, 0.05);
+		}
+
+		.project-card h3 {
+			font-size: 20px;
+			color: #ffffff;
+			margin: 0 0 15px 0;
+		}
+
+		.project-card p {
+			font-size: 14px;
+			color: #8a8a8a;
+			line-height: 1.6;
+			margin: 0;
+		}
+
+		.partner-card {
+			display: flex;
+			align-items: center;
+			gap: 20px;
+			background: rgba(255, 255, 255, 0.03);
+			border: 1px solid rgba(255, 255, 255, 0.1);
+			border-radius: 12px;
+			padding: 20px;
+			margin-bottom: 20px;
+		}
+
+		.partner-card img {
+			width: 60px;
+			height: 60px;
+			border-radius: 8px;
+		}
+
+		.partner-info h3 {
+			font-size: 18px;
+			color: #ffffff;
+			margin: 0 0 8px 0;
+		}
+
+		.partner-info p {
+			font-size: 14px;
+			color: #8a8a8a;
+			margin: 0;
+		}
+
+		.links {
+			display: flex;
+			gap: 15px;
+			margin-top: 30px;
+		}
+
+		.links a {
+			padding: 10px 20px;
+			border: 1px solid rgba(255, 255, 255, 0.2);
+			background: transparent;
+			color: #ffffff;
+			border-radius: 6px;
+			text-decoration: none;
+			font-size: 13px;
+			transition: all 0.3s ease;
+		}
+
+		.links a:hover {
+			background: rgba(215, 139, 255, 0.1);
+			border-color: #d78bff;
+		}
+
+		.buttons-grid {
+			display: flex;
+			flex-wrap: wrap;
+			gap: 12px;
+			margin-top: 20px;
+		}
+
+		.buttons-grid img {
+			height: 31px;
+			width: 88px;
+			border: 1px solid rgba(255, 255, 255, 0.1);
+			border-radius: 4px;
+			transition: all 0.2s ease;
+		}
+
+		.buttons-grid img:hover {
+			transform: scale(1.05);
+			border-color: #d78bff;
+		}
+
+		@media (max-width: 768px) {
+			.container {
+				padding: 40px 20px;
+			}
+
+			.hero h1 {
+				font-size: 40px;
+			}
+
+			.stats {
+				flex-direction: column;
+				gap: 30px;
+			}
+
+			.section-title {
+				font-size: 24px;
+			}
+
+			.partner-card {
+				flex-direction: column;
+				text-align: center;
+			}
+
+			.links {
+				flex-direction: column;
+			}
+		}
+	</style>
 </head>
 
 <body>
-    <!-- Starry Snow Background -->
-    <canvas id="snow"></canvas>
+	<!-- Starry Snow Background -->
+	<canvas id="snow"></canvas>
 
-    <!-- Profile -->
-    <img src="./favicon.ico"
-        alt="Profile Picture" class="pfp">
-    <h1>Sydney <span>(He/him)</span></h1>
-    <p>Now what the F is a vibecoder</p>
+	<div class="container">
+		<!-- Hero Section -->
+		<div class="hero">
+			<div class="tagline">notsydney</div>
 
-    <!-- Links -->
-    <div class="links">
-        <button onclick="window.open('https://github.com/creatorcat70','_blank')">GitHub</button>
-        <button onclick="window.open('https://discord.gg/FdxKqAEqqM','_blank')">Discord</button>
-        <button onclick="window.open('https://your-portfolio.com','_blank')">Portfolio</button>
-    </div>
+			<img src="./favicon.ico" alt="Profile Picture" class="pfp">
 
-    <!-- About Me -->
-    <section>
-        <hr>
-        <h2>&gt; about_me</h2>
-        <p>I'm a boy<br>
-            very skibidi <br>
+			<h1>Sydney <span style="font-size: 24px; font-weight: normal; color: #666;">(He/him)</span></h1>
+
+			<p>Now what the F is a vibecoder</p>
+
+			
+				<div class="stat-item">
+					<h3>FOCUS</h3>
+					<p>Web Development & Proxies</p>
+				</div>
+			</div>
+
+			<div class="links">
+				<a href="https://github.com/creatorcat70" target="_blank">GitHub</a>
+				<a href="https://discord.gg/FdxKqAEqqM" target="_blank">Discord</a>
+				<a href="#" target="_blank">Portfolio</a>
+			</div>
+		</div>
+
+		<!-- About Section -->
+		<h2 class="section-title">Where I Shine</h2>
+		<p style="color: #8a8a8a; font-size: 16px; line-height: 1.8; max-width: 800px; margin-bottom: 60px;">
+			I'm a boy<br>
+            very skibidi<br>
             Vplaza is very good.
         </p>
-    </section>
 
-    <!-- Projects -->
-    <section>
-        <hr>
-        <h2>&gt; projects</h2>
-        <div class="project">
-            <h3>Calcite</h3>
-            <p>A bare-powered web proxy with a minimalistic supreme design.</p>
-        </div>
-    </section>
+			<!-- Projects Section -->
+			<h2 class="section-title">Featured Projects</h2>
+			<div class="projects-grid">
+				<div class="project-card">
+					<h3>Calcite</h3>
+					<p>A bare-powered web proxy with a minimalistic supreme design. Built for performance, security, and
+						seamless user experience.</p>
+				</div>
+			</div>
 
-    <!-- Partners -->
-    <section>
-        <hr>
-        <h2>&gt; partners</h2>
-        <div class="project">
-            <h3>Vplaza</h3>
-            <p>the proxy is fine, the people running it are AMAZING</p>
-            <img src="https://raw.githubusercontent.com/vpl1aza/vpl1aza.github.io/main/vplazax.png" alt="Vplaza"
-                width="120">
-        </div>
-    </section>
-    <section>
-        <div class="project">
-            <h3>Elusion</h3>
-            <p>Sigma</p>
-            <img src="https://cdn.discordapp.com/icons/1371643970270138378/c31c1b2b746d1775e59c17a5ab37cd7d.webp?size=128" alt="Elusion"
-                width="120">
-        </div>
-    </section>
+			<!-- Partners Section -->
+			<h2 class="section-title">Partners & Collaborators</h2>
 
-    <!-- Buttons -->
-    <section>
-        <hr>
-        <h2>&gt; buttons</h2>
-        <div class="buttons">
-            <a href="https://bomberfish.ca" target="_blank">
-                <img src="./button.gif" alt="Button 1">
-            </a>
-            <a href="https://wearr.dev" target="_blank">
-                <img src="./wearr.gif" alt="Wearr">
-            </a>
-            <a href="https://archlinux.org" target="_blank">
-                <img src="./arch.gif" alt="Arch">
-            </a>
-            <a href="https://foxmoss.com" target="_blank">
-                <img src="./foxmossbutton.png" alt="Foxmoss">
-            </a>
-            <a href="https://www.chromium.org/chromium-projects/" target="_blank">
-                <img src="./firefox.gif" alt="Firefox">
-            </a>
-            <a href="https://linux.org" target="_blank">
-                <img src="./linux.gif" alt="Made on linux">
-            </a>
-            <a href="https://www.simpleanalytics.com/" target="_blank">
-                <img src="./simpleanalytics.svg" alt="Simple Analytics">
-            </a>
-        </div>
-    </section>
+			<div class="partner-card">
+				<img src="https://raw.githubusercontent.com/vpl1aza/vpl1aza.github.io/main/vplazax.png" alt="Vplaza">
+				<div class="partner-info">
+					<h3>Vplaza</h3>
+					<p>the proxy is fine, the people running it are AMAZING</p>
+				</div>
+			</div>
 
-    <!-- Credits -->
-    <section>
-        <hr>
-        <h2>&gt; credits</h2>
-        <div class="project">
-            <h3>Scaratek</h3>
-            <p>I'm sorry for stealing ur Portfolio 😅</p>
-        </div>
-    </section>
+			<div class="partner-card">
+				<img src="https://cdn.discordapp.com/icons/1371643970270138378/c31c1b2b746d1775e59c17a5ab37cd7d.webp?size=128" alt="Elusion">
+				<div class="partner-info">
+					<h3>Elusion</h3>
+					<p>Sigma</p>
+				</div>
+			</div>
 
-    <!-- Snow / Stars Script -->
-    <script>
-        const canvas = document.getElementById("snow");
+			<!-- Buttons Section -->
+			<h2 class="section-title">Buttons</h2>
+			<div class="buttons-grid">
+				<a href="https://bomberfish.ca" target="_blank">
+					<img src="./button.gif" alt="Button 1">
+            </a>
+					<a href="https://wearr.dev" target="_blank">
+						<img src="./wearr.gif" alt="Wearr">
+            </a>
+						<a href="https://archlinux.org" target="_blank">
+							<img src="./arch.gif" alt="Arch">
+            </a>
+							<a href="https://foxmoss.com" target="_blank">
+								<img src="./foxmossbutton.png" alt="Foxmoss">
+            </a>
+								<a href="https://www.chromium.org/chromium-projects/" target="_blank">
+									<img src="./firefox.gif" alt="Firefox">
+            </a>
+									<a href="https://linux.org" target="_blank">
+										<img src="./linux.gif" alt="Made on linux">
+            </a>
+										<a href="https://www.simpleanalytics.com/" target="_blank">
+											<img src="./simpleanalytics.svg" alt="Simple Analytics">
+            </a>
+			</div>
+
+			<!-- Credits -->
+			<div style="margin-top: 100px; padding-top: 40px; border-top: 1px solid rgba(255,255,255,0.1);">
+				<p style="font-size: 12px; color: #666;">
+					Design inspired by Akane • Built with passion • © 2025 Sydney
+				</p>
+			</div>
+	</div>
+
+	<!-- Snow / Stars Script -->
+	<script>
+		const canvas = document.getElementById("snow");
         const ctx = canvas.getContext("2d");
         canvas.width = window.innerWidth;
         canvas.height = window.innerHeight;
@@ -279,18 +423,10 @@
             flakes = [];
             createFlakes();
         });
-    </script>
-<!-- 100% privacy-first analytics -->
-<script async src="https://scripts.simpleanalyticscdn.com/latest.js"></script>
+	</script>
+
+	<!-- 100% privacy-first analytics -->
+	<script async src="https://scripts.simpleanalyticscdn.com/latest.js"></script>
 </body>
 
 </html>
-
-
-
-
-
-
-
-
-
